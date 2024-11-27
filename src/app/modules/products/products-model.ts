@@ -10,7 +10,15 @@ const ProductSchema = new Schema<IProduct>({
     type: ['Mountain' , 'Road' , 'Hybrid' , 'BMX' , 'Electric'],
     description : String,
     quantity:Number,
-    inStock : Boolean
+    inStock : Boolean,
+    createdAt: {
+        type: String,
+        required: false 
+    },
+    updatedAt: {
+        type: String,
+        required: false 
+    }
 },  { versionKey: false })
 
 

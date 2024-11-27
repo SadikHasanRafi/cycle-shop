@@ -6,4 +6,6 @@ export default interface IProduct {
   description: string;
   quantity: number;
   inStock: boolean;
+  createdAt?: string;
+  updatedAt?: string;
 }
