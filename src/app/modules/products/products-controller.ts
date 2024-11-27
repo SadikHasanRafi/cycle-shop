@@ -1,21 +1,35 @@
 import { Request, Response } from "express";
+import { productService } from "./products-service";
 
-
-
- 
-const getAllProducts = async (req: Request, res: Response) => {
-console.log("🚀 ~ getAllProducts ~ req:", req)
-
-    res.send("asdkjabskdj")
-}
 
 
  
 const createProduct = async (req: Request, res: Response) => {
+    try {
+        console.log("🚀 ~ getAllProducts ~ req:", req)
+        
+        const result =await productService.createProduct(req.body)
+
+        res.send({
+            message:"Bicycle created successfully", success:true , data : result
+        })
+    } catch (error) {
+        console.log(error)
+        res.send(error)
+    }
+
+}
+
+
+ 
+const getAllProducts  = async (req: Request, res: Response) => {
     console.log("🚀 ~ createProducts ~ req:", req)
     
+    const result = await productService.getAllProducts()
 
-    res.send("asdkjabskdj")
+    res.send({
+        message:"Bicycles retrieved successfully", success:true , data : result
+    })
 }
 
 const getSingleProduct = async (req: Request, res: Response) => {

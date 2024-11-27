@@ -6,7 +6,8 @@ const orderSchema = new Schema<IOder>({
     product: { type: Schema.Types.ObjectId, ref: 'Bicycle', required: true },  // Reference to Bicycle model
     quantity: { type: Number, required: true },
     totalPrice: { type: Number, required: true }
-  });
+  }, { versionKey: false }
+);
 
 
 export const OrderModel = mongoose.model('Order', orderSchema);

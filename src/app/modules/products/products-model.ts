@@ -11,7 +11,7 @@ const ProductSchema = new Schema<IProduct>({
     description : String,
     quantity:Number,
     inStock : Boolean
-})
+},  { versionKey: false })
 
 
 
