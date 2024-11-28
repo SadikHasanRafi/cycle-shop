@@ -23,9 +23,15 @@ const createProduct = async (req: Request, res: Response) => {
 
  
 const getAllProducts  = async (req: Request, res: Response) => {
-    console.log("🚀 ~ createProducts ~ req:", req)
-    
-    const result = await productService.getAllProducts()
+    console.log("🚀 ~ createProducts ~ req:", req.query)
+    let result
+    const filter = req.query
+    if (filter) {
+         result = await productService.getAllProducts(filter)
+    }else{
+         result = await productService.getAllProducts({})
+    }
+
 
     res.send({
         message:"Bicycles retrieved successfully", success:true , data : result

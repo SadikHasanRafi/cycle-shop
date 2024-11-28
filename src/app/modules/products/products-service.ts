@@ -7,8 +7,9 @@ const createProduct = async (data:IProduct) => {
     return result
 }
 
-const getAllProducts= async () => {
-    const result = await ProductModel.find({})
+const getAllProducts= async (filter : unknown ) => {
+    console.log("🚀 ~ getAllProducts ~ filter:", filter)
+    const result = await ProductModel.find(filter ? filter : {})
     return result
 }
 
