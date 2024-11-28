@@ -18,8 +18,12 @@ const getSingleProduct = async (filter: RootFilterQuery<IProduct> ) => {
     return result
 }
 
+const updateSingleProduct = async (filter: RootFilterQuery<IProduct>, update: Partial<IProduct>) => {
+    const result = await ProductModel.findOneAndUpdate(filter, {$set: update}, {new: true})
+    return result
+}
 
 
 export const productService = {
-    createProduct,getAllProducts,getSingleProduct
+    createProduct,getAllProducts,getSingleProduct,updateSingleProduct
 }

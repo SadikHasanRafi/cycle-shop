@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { productService } from "./products-service";
-import mongoose, { ObjectId } from "mongoose";
+import mongoose from "mongoose";
 
 
  
@@ -23,7 +23,6 @@ const createProduct = async (req: Request, res: Response) => {
 
  
 const getAllProducts  = async (req: Request, res: Response) => {
-    console.log("🚀 ~ createProducts ~ req:", req.query)
     let result
     const filter = req.query
     if (filter) {
@@ -44,10 +43,12 @@ const getSingleProduct = async (req: Request, res: Response) => {
 }
 
 const updateSingleProduct = async (req: Request, res: Response) => {
-    console.log("🚀 ~ createProducts ~ req:", req)
-    
-
-    res.send("asdkjabskdj")
+    const update = req.body
+    const id = new  mongoose.Types.ObjectId(String(req.params.productId))
+    const result = await productService.updateSingleProduct({_id : id}, update )
+    res.send({
+        message:"Bicycle updated successfully", success:true , data : result
+    })
 }
 
 const deleteProduct = async (req: Request, res: Response) => {
