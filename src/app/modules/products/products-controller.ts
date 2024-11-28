@@ -52,10 +52,11 @@ const updateSingleProduct = async (req: Request, res: Response) => {
 }
 
 const deleteProduct = async (req: Request, res: Response) => {
-    console.log("🚀 ~ createProducts ~ req:", req)
-    
-
-    res.send("asdkjabskdj")
+    const id = new mongoose.Types.ObjectId(req.params.productId)
+    const result = await productService.deleteProduct({_id : id})
+    res.send({
+        message:"Bicycle deleted successfully", success:true , data : result
+    })
 }
 
 

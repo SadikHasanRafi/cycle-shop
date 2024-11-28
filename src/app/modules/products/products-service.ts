@@ -23,7 +23,14 @@ const updateSingleProduct = async (filter: RootFilterQuery<IProduct>, update: Pa
     return result
 }
 
+const deleteProduct = async (filter: RootFilterQuery<IProduct>) => {
+    const result = await ProductModel.findOneAndDelete(filter)
+    console.log("🚀 ~ deleteProduct ~ result:", result)
+    return {}
+
+}
+
 
 export const productService = {
-    createProduct,getAllProducts,getSingleProduct,updateSingleProduct
+    createProduct,getAllProducts,getSingleProduct,updateSingleProduct,deleteProduct
 }
