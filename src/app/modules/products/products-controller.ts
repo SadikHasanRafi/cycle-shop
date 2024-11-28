@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { productService } from "./products-service";
-
+import mongoose, { ObjectId } from "mongoose";
 
 
  
@@ -31,18 +31,16 @@ const getAllProducts  = async (req: Request, res: Response) => {
     }else{
          result = await productService.getAllProducts({})
     }
-
-
     res.send({
         message:"Bicycles retrieved successfully", success:true , data : result
     })
 }
 
 const getSingleProduct = async (req: Request, res: Response) => {
-    console.log("🚀 ~ createProducts ~ req:", req)
-    
-
-    res.send("asdkjabskdj")
+    const result = await productService.getSingleProduct({_id:new  mongoose.Types.ObjectId(String(req.params.productId))})
+    res.send({
+        message:"Bicycle retrieved successfully", success:true , data : result
+    })
 }
 
 const updateSingleProduct = async (req: Request, res: Response) => {
