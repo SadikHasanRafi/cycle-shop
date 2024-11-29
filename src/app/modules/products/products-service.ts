@@ -1,32 +1,38 @@
 import { RootFilterQuery } from "mongoose";
 import IProduct from "./products-interface";
-import { ProductModel } from "./products-model";
+import { Product } from "./products-model";
 
 
 const createProduct = async (data:IProduct) => {
-    const result = await ProductModel.create(data)
+    const result = await Product.create(data)
     return result
 }
 
 const getAllProducts= async (filter : unknown ) => {
-    const result = await ProductModel.find(filter ? filter : {})
+    const result = await Product.find(filter ? filter : {})
     return result
 }
 
 const getSingleProduct = async (filter: RootFilterQuery<IProduct> ) => {
-    const result = await ProductModel.find(filter)
+    const result = await Product.find(filter)
     return result
 }
 
 const updateSingleProduct = async (filter: RootFilterQuery<IProduct>, update: Partial<IProduct>) => {
-    const result = await ProductModel.findOneAndUpdate(filter, {$set: update}, {new: true})
+    const result = await Product.findOneAndUpdate(filter, {$set: update}, {new: true})
     return result
 }
 
-const deleteProduct = async (filter: RootFilterQuery<IProduct>) => {
-    const result = await ProductModel.findOneAndDelete(filter)
-    console.log("🚀 ~ deleteProduct ~ result:", result)
-    return {}
+const deleteProduct = async (data: RootFilterQuery<IProduct>) => {
+    const product = new Product(data)
+    const isDuplicate = await product.duplicateCheck();
+    let result 
+    if (isDuplicate) { 
+        result = await Product.findOneAndDelete(data)
+    }else{
+        result = { message: "Product does not exists", success: false, data:{} }
+    }
+        return result
 
 }
 

@@ -6,7 +6,7 @@ import mongoose from "mongoose";
  
 const createProduct = async (req: Request, res: Response) => {
     try {
-        console.log("🚀 ~ getAllProducts ~ req:", req)
+        //console.log("🚀 ~ getAllProducts ~ req:", req)
         
         const result =await productService.createProduct(req.body)
 
@@ -14,7 +14,7 @@ const createProduct = async (req: Request, res: Response) => {
             message:"Bicycle created successfully", success:true , data : result
         })
     } catch (error) {
-        console.log(error)
+        //console.log(error)
         res.send(error)
     }
 

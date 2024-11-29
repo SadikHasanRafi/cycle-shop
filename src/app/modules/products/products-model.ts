@@ -1,9 +1,11 @@
-import mongoose, { Schema } from "mongoose";
-import IProduct from "./products-interface";
+import mongoose, { Model, Schema } from "mongoose";
+import IProduct, { IProductModel } from "./products-interface";
 
 
+type ProductModel = Model<IProduct, object, IProductModel>;
 
-const ProductSchema = new Schema<IProduct>({
+const productSchema = new Schema<IProduct,ProductModel, IProductModel >({
+    
     name:String,
     brand:String,
     price:Number,
@@ -22,5 +24,13 @@ const ProductSchema = new Schema<IProduct>({
 },  { versionKey: false })
 
 
+productSchema.method('duplicateCheck', async function duplicateCheck(){
+    const result = await Product.findById(this._id)
+    console.log("🚀 ~ duplicateCheck ~ result:", result)
+    return result
+});
 
-export const ProductModel = mongoose.model("Product",ProductSchema)
+
+
+
+export const Product = mongoose.model("Product",productSchema)

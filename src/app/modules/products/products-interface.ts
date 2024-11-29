@@ -9,3 +9,9 @@ export default interface IProduct {
   createdAt?: string;
   updatedAt?: string;
 }
+
+export interface IProductModel  {
+  duplicateCheck(): boolean;
+}
+
+
