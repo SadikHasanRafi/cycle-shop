@@ -6,3 +6,4 @@ export default interface IOder {
     quantity:number
     totalPrice:number
 }
+

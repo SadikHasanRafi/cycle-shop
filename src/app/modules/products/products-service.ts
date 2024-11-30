@@ -10,6 +10,8 @@ const createProduct = async (data:IProduct) => {
 
 const getAllProducts= async (filter : unknown ) => {
     const result = await Product.find(filter ? filter : {})
+    const product = new Product(filter )
+    const res = product.isAvailable()
     return result
 }
 
