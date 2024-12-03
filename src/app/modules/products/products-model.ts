@@ -9,7 +9,7 @@ const productSchema = new Schema<IProduct,ProductModel, IProductModel >({
     name:String,
     brand:String,
     price:Number,
-    type: ['Mountain' , 'Road' , 'Hybrid' , 'BMX' , 'Electric'],
+    type:String,
     description : String,
     quantity:Number,
     inStock : Boolean,
@@ -28,8 +28,6 @@ productSchema.method('duplicateCheck', async function duplicateCheck(){
     const result = await Product.findById(this._id)
     return result
 });
-
-
 
 
 

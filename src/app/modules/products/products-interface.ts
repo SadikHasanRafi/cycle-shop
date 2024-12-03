@@ -2,7 +2,7 @@ export default interface IProduct {
   name: string;
   brand: string;
   price: number;
-  type: 'Mountain' | 'Road' | 'Hybrid' | 'BMX' | 'Electric';
+  type: string
   description: string;
   quantity: number;
   inStock: boolean;

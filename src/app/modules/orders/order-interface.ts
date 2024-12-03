@@ -7,3 +7,6 @@ export default interface IOder {
     totalPrice:number
 }
 
+export interface IOrderModel {
+    isAvailable():boolean;
+}
