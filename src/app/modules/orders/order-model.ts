@@ -1,11 +1,10 @@
 import mongoose, { Model, Schema } from "mongoose";
-import IOder, { IOrderModel } from "./order-interface";
-import { Product } from "../products/products-model";
+import { IOrder, IOrderModel } from "./order-interface";
 
 
-type  OrderModel = Model<IOder, object, IOrderModel>;
+type  OrderModel = Model<IOrder, object, IOrderModel>;
 
-const orderSchema = new Schema<IOder,OrderModel, IOrderModel>({
+const orderSchema = new Schema<IOrder,OrderModel, IOrderModel>({
     email: { type: String, required: true },
     product: { type: Schema.Types.ObjectId, ref: 'Bicycle', required: true },  // Reference to Bicycle model
     quantity: { type: Number, required: true },
@@ -13,14 +12,6 @@ const orderSchema = new Schema<IOder,OrderModel, IOrderModel>({
   }, { versionKey: false }
 );
 
-orderSchema.method('isAvailable', async function () {
-  console.log("🚀 ~ this:", this)
-  const product = new Product(this)
-const objectId = {_id:(this.product).toString()}
-  const result = await product.findById(objectId);
-  // console.log("🚀 ~ (this.product).toString():", (this.product).toString())
-  return result
-})
 
 
 

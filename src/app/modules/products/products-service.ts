@@ -21,6 +21,9 @@ const getSingleProduct = async (filter: RootFilterQuery<IProduct> ) => {
 }
 
 const updateSingleProduct = async (filter: RootFilterQuery<IProduct>, update: Partial<IProduct>) => {
+    const product = new Product(data)
+    const isDuplicate = await product.duplicateCheck();
+    //! work at here
     const result = await Product.findOneAndUpdate(filter, {$set: update}, {new: true})
     return result
 }
@@ -30,7 +33,7 @@ const deleteProduct = async (data: RootFilterQuery<IProduct>) => {
     const isDuplicate = await product.duplicateCheck();
     let result 
     if (isDuplicate) { 
-        // result = await Product.findOneAndDelete(data)
+        result = await Product.findOneAndDelete(data)
     }else{
         result = { message: "Product does not exists", success: false, data:{} }
     }

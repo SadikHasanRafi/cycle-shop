@@ -1,8 +1,9 @@
 import { Request, Response } from 'express';
 import { orderService } from './order-service';
+import { IOrder } from './order-interface';
 
 const createOrder = async (req: Request, res: Response) => {
-  const result = await orderService.createOrder(req.body)
+  const result = await orderService.createOrder(req.body as IOrder)
   console.log("🚀 ~ createOrder ~ result:", result)
 
   res.send({

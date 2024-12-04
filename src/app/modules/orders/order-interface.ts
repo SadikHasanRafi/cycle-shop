@@ -1,6 +1,6 @@
 import { ObjectId } from "mongoose"
 
-export default interface IOder {
+export  interface IOrder {
     email:string
     product:ObjectId
     quantity:number
