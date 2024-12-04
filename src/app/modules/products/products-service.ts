@@ -30,7 +30,7 @@ const deleteProduct = async (data: RootFilterQuery<IProduct>) => {
     const isDuplicate = await product.duplicateCheck();
     let result 
     if (isDuplicate) { 
-        result = await Product.findOneAndDelete(data)
+        // result = await Product.findOneAndDelete(data)
     }else{
         result = { message: "Product does not exists", success: false, data:{} }
     }

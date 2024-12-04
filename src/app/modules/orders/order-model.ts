@@ -1,5 +1,6 @@
 import mongoose, { Model, Schema } from "mongoose";
 import IOder, { IOrderModel } from "./order-interface";
+import { Product } from "../products/products-model";
 
 
 type  OrderModel = Model<IOder, object, IOrderModel>;
@@ -13,8 +14,12 @@ const orderSchema = new Schema<IOder,OrderModel, IOrderModel>({
 );
 
 orderSchema.method('isAvailable', async function () {
-  console.log(this.product)
-  // const result = await orderSchema.
+  console.log("🚀 ~ this:", this)
+  const product = new Product(this)
+const objectId = {_id:(this.product).toString()}
+  const result = await product.findById(objectId);
+  // console.log("🚀 ~ (this.product).toString():", (this.product).toString())
+  return result
 })
 
 
