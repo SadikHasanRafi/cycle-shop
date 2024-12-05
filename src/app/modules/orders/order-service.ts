@@ -10,21 +10,20 @@ const createOrder =async (data: IOrder) => {
     if(product.inStock){
 
         const quantity = product.quantity - data.quantity;
+        product.quantity = quantity;
+        let inStock:boolean = product.inStock
         if(quantity < 0){
             result =  { message: "Insufficient stock.", success: false, data:{} }
         }
         else if(quantity == 0){
-            product.quantity = quantity;
-            product.inStock = false;
-            await Product.findOneAndUpdate({ _id: product._id }, {$set: {quantity:quantity, inStock:false}}, { new: true });
-            const finalProduct = await Product.findOne({ _id: product._id })
-            result =  { message: "Order created successfully.", success: true, data:finalProduct }
+            inStock = false;
         }else {
-            product.quantity = quantity;
-            await Product.findOneAndUpdate({ _id: product._id }, { quantity }, { new: true });
-            const finalProduct = await Product.findOne({ _id: product._id })
-            result =  { message: "Order created successfully.", success: true, data:finalProduct }
+            inStock = true;
         }
+        await Product.findOneAndUpdate({ _id: product._id }, {$set: {quantity:quantity, inStock:inStock}}, { new: true });
+        const finalProduct = await Product.findOne({ _id: product._id })
+        result =  { message: "Order created successfully.", success: true, data:finalProduct }
+
     }else {
         result =  { message: "This product is not available right now.", success: false, data:{} }
     }
@@ -35,6 +34,6 @@ const createOrder =async (data: IOrder) => {
 
 
 
-export const orderService = {
+export const aorderService = {
     createOrder
 }
