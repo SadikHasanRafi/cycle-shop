@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { productService } from "./products-service";
-import mongoose from "mongoose";
+import mongoose, { isObjectIdOrHexString } from "mongoose";
 
 
  
@@ -52,7 +52,7 @@ const updateSingleProduct = async (req: Request, res: Response) => {
 }
 
 const deleteProduct = async (req: Request, res: Response) => {
-    const id = new mongoose.Types.ObjectId(req.params.productId)
+    const id = req.params.productId
     const result = await productService.deleteProduct({_id : id})
     res.send({
         message:"Bicycle deleted successfully", success:true , data : result

@@ -14,7 +14,7 @@ export default interface IProduct {
 }
 
 export interface IProductModel  {
-  duplicateCheck(): boolean;
+  isAvailable(): IProduct 
 }
 
 

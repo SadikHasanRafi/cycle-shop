@@ -34,6 +34,6 @@ const createOrder =async (data: IOrder) => {
 
 
 
-export const aorderService = {
+export const orderService = {
     createOrder
 }
