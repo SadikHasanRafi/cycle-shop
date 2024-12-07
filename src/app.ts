@@ -13,7 +13,7 @@ app.use(cors());
 
  
 app.get("/", (req: Request, res: Response) => {
-  res.send("Hello Pookie 🎀🎁!");
+  res.send("Hello world!");
 });
 
 app.use("/api",routes)
