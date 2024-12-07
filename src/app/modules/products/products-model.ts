@@ -26,15 +26,8 @@ const productSchema = new Schema<IProduct,ProductModel, IProductModel >({
 
 productSchema.method('isAvailable', async function isAvailable(){
     const result = await Product.findById(this._id)
-    console.log("🚀 ~ isAvailable ~ result:", this)
-    // return result===null ? false : result as unknown as IProduct
     return result
 });
-
-// productSchema.method('isAvailable', async function duplicateCheck(){
-//     const result = await Product.findById(this)
-//     return result
-// });
 
 
 
